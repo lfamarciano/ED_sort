@@ -76,7 +76,7 @@ int main()
     int randomValue;
     Node* head = nullptr;
 
-    for (int iNumListas = 0; iNumListas<10; iNumListas++) // testando em 10 listas
+    for (int iNumListas = 0; iNumListas<20; iNumListas++) // testando em 10 listas
     {
         head = nullptr;
         for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores na lista
@@ -112,6 +112,7 @@ int main()
         timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
         arriTempoSelectionOptimized[iNumListas] = timeDuration.count();
 
+        cout << "Elemento " << iNumListas << ": " << arriTempoSelectionOptimized[iNumListas] << endl; 
         deleteList(&head);
     }
     cout << "======================== FIM ========================" << endl;
