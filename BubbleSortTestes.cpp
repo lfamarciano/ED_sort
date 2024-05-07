@@ -19,7 +19,6 @@ typedef struct Node
 
 // Funções Lista Duplamente Ecadeada 
 Node* createNode(int);
-int sizeOfList(Node*);
 void insertFront(Node**, int);
 void insertEnd(Node**, int);
 void insertAfter(Node*, int);
@@ -31,7 +30,7 @@ void deleteNodebyValue(Node**, int);
 // Funções para Bubble Sort
 void swapValue(int&, int&);
 void bubbleSort(Node**);
-void optimizedBubbleSort(int[], int);
+void optimizedBubbleSort(Node** head);
 
 int main()
 {
@@ -46,10 +45,15 @@ int main()
     insertEnd(&head,0);
     insertEnd(&head,7);
     displayList(head);
-    cout << "Tamanho da lista: " << sizeOfList(head) << endl;
     cout << "==============" << endl;
+    auto timeStart = high_resolution_clock::now();
     bubbleSort(&head);
+    auto timeStop = high_resolution_clock::now();
+    
     displayList(head);
+    
+    auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+    cout << "Tempo para ordenação: " << timeDuration.count() << " nanosegundos" << endl;
     cout << "======================== FIM ========================" << endl;
     return 0;
 }
@@ -60,14 +64,6 @@ void swapValue(int& irefValue1, int& irefValue2){
     irefValue2 = iTemp;
 }
 
-// void bubbleSort(Node** head){
-//     for (int iOuterLoop=0; iOuterLoop<iLength-1; iOuterLoop++){
-//         for (int iInnerLoop=0; iInnerLoop<iLength-1; iInnerLoop++){
-//             if (arriNumbers[iInnerLoop] > arriNumbers[iInnerLoop + 1])
-//                 swapValue(arriNumbers[iInnerLoop], arriNumbers[iInnerLoop + 1]);
-//         }
-//     }
-// }
 void bubbleSort(Node** head){
     if (*head == nullptr)
     {
@@ -93,21 +89,39 @@ void bubbleSort(Node** head){
     }
 }
 
-void optimizedBubbleSort(int arriNumbers[], int iLength){
+void optimizedBubbleSort(Node** head){
+    if (*head == nullptr)
+    {
+      cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
+      return;
+    }
+
+    Node* outer_current = *head;
+    Node* inner_current = *head;
+    Node* last_correct = *head;
     bool bUnordered = false;
-    
-    for (int iOuterLoop=0; iOuterLoop<iLength-1; iOuterLoop++){
+  
+    while(last_correct->ptrNext != nullptr) last_correct = last_correct->ptrNext;
+
+    while (outer_current->ptrNext != nullptr)
+    {
+        inner_current = *head;
         bUnordered = false;
-        for (int iInnerLoop=0; iInnerLoop<iLength-1-iOuterLoop; iInnerLoop++){
-            if (arriNumbers[iInnerLoop] > arriNumbers[iInnerLoop + 1])
-                swapValue(arriNumbers[iInnerLoop], arriNumbers[iInnerLoop + 1]);
-                bUnordered = true;
+        while (inner_current != last_correct)
+        {
+            if (inner_current->iPayload > inner_current->ptrNext->iPayload)
+            {
+                swapValue(inner_current->iPayload, inner_current->ptrNext->iPayload);
+            }
+            inner_current = inner_current->ptrNext;
+            bUnordered = true;
         }
-        
-        if (bUnordered == false) break;
+        outer_current = outer_current->ptrNext;
+        last_correct = last_correct->ptrPrev;
+
+        if (bUnordered==false) break;
     }
 }
-
 
 Node* createNode(int iPayload)
 {
@@ -117,30 +131,6 @@ Node* createNode(int iPayload)
     temp->ptrPrev = nullptr;
     
     return temp;
-}
-
-int sizeOfList(Node* node){
-    if (node == nullptr)
-    {
-        cout << "Lista vazia: Não é possível realizar sizeOfList" << endl;
-        return 0; //Usa return pra sair da função, o resto do código não será executado
-    }
-    
-    if  (node -> ptrPrev != nullptr)
-    {
-        cout << "Meio ou Fim da Lista: Não é possível realizar sizeOfList" << endl;
-        return 0;
-       
-    }
-    
-    Node* temp = node;
-    int counter = 0;
-    while(temp != nullptr)
-    {
-        counter++;
-        temp = temp->ptrNext;
-    }
-    return counter;
 }
 
 void displayList(Node* node)
