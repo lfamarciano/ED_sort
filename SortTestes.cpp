@@ -1,0 +1,297 @@
+#include <iostream>
+#include <chrono>
+#include <cstdlib> // para usar valores aleatórios nas listas
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::nanoseconds;
+
+using std::rand; // para usar valores aleatórios nas listas
+
+typedef struct Node
+{
+    int iPayload;
+    Node* ptrNext;
+    Node* ptrPrev;
+} Node;
+
+// Funções Lista Duplamente Ecadeada 
+Node* createNode(int);
+void insertFront(Node**, int);
+void insertEnd(Node**, int);
+void insertAfter(Node*, int);
+void displayList(Node*);
+void insertBefore(Node*, int);
+Node* searchNodebyValue(Node*, int);
+void deleteNodebyValue(Node**, int);
+
+// Funções para Bubble e Selection Sort
+void swapValue(int&, int&);
+void bubbleSort(Node**);
+void optimizedBubbleSort(Node**);
+void selectionSort(Node**);
+void optimizedSelectionSort(Node**);
+
+int main()
+{
+    Node* head = nullptr;
+    displayList(head);
+    bubbleSort(&head);
+    cout << "==============" << endl;
+    insertEnd(&head,10);
+    insertEnd(&head,3);
+    insertEnd(&head,1);
+    insertEnd(&head,13);
+    insertEnd(&head,0);
+    insertEnd(&head,7);
+    displayList(head);
+
+    cout << "==============" << endl;
+    optimizedSelectionSort(&head);
+    displayList(head);
+    cout << "==============" << endl;
+
+
+    // auto timeStart = high_resolution_clock::now();
+    // auto timeStop = high_resolution_clock::now();
+    // auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+
+    // for (int iNumListas = 0; iNumListas<11; iNumListas++)
+    // {
+    //     Node* head = nullptr;
+    //     for (int iTamLista = 0; iTamLista < 10001; iTamLista++) // adicionando 10000 valores na lista
+    //     {
+    //         int randomValue = rand() % 501;
+    //         insertFront(&head, randomValue);
+    //     }
+        
+    // }
+    cout << "======================== FIM ========================" << endl;
+    return 0;
+}
+
+Node* createNode(int iPayload)
+{
+    Node* temp = (Node*)malloc(sizeof(Node));
+    temp->iPayload = iPayload;
+    temp->ptrNext = nullptr;
+    temp->ptrPrev = nullptr;
+    
+    return temp;
+}
+
+void displayList(Node* node)
+{
+    if (node == nullptr)
+    {
+        cout << "Lista vazia: Não é possível realizar displayList" << endl;
+        return; //Usa return pra sair da função, o resto do código não será executado
+    }
+    
+    if  (node -> ptrPrev != nullptr)
+    {
+        cout << "Meio ou Fim da Lista: Não é possível realizar displayList" << endl;
+        return;
+       
+    }
+    
+    Node* temp = node;
+     
+    cout << "Payload: ";
+    
+    while(temp != nullptr)
+    {
+        cout << temp->iPayload<< " ";
+        temp = temp->ptrNext;
+    }
+    
+    cout << endl;
+}
+
+void insertFront(Node** head, int iPayload)
+{
+    Node* newNode = createNode(iPayload);
+    // newNode->ptrNext = nullptr;
+    
+    if (*head != nullptr)
+    {
+        (*head)->ptrPrev = newNode;
+        newNode->ptrNext = (*head);
+        (*head) = newNode;
+        
+        return;
+    }
+}
+
+void insertEnd(Node** head, int iPayload)
+{
+  Node* newNode = createNode(iPayload);
+  //newNode -> ptrNext = nullptr;
+  
+  if (*head == nullptr)
+  {
+      //newNode -> ptrNext = nullptr; Essa linha não é obrigatória pois já definimos anteriormente
+      (*head) = newNode;
+      return;
+      
+  }
+  
+  Node* temp = (*head);
+  
+  //Percorremos a lista até seu fim(ptrNext do ultimo nó é NULL)
+  while(temp->ptrNext != nullptr) temp = temp->ptrNext;
+  
+  newNode->ptrPrev = temp; //newNode aponta para o fim da lista
+  temp->ptrNext = newNode; //Antigo último elemento aponta para o novo nó
+}
+
+void swapValue(int& irefValue1, int& irefValue2){
+    int iTemp = irefValue1;
+    irefValue1 = irefValue2;
+    irefValue2 = iTemp;
+}
+
+void bubbleSort(Node** head){
+    if (*head == nullptr)
+    {
+      cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
+      return;
+    }
+
+    Node* outer_current = *head;
+    Node* inner_current = *head;
+
+    while (outer_current->ptrNext != nullptr)
+    {
+        inner_current = *head;
+        while (inner_current->ptrNext != nullptr)
+        {
+            if (inner_current->iPayload > inner_current->ptrNext->iPayload)
+            {
+                swapValue(inner_current->iPayload, inner_current->ptrNext->iPayload);
+            }
+            inner_current = inner_current->ptrNext;
+        }
+        outer_current = outer_current->ptrNext;
+    }
+}
+
+void optimizedBubbleSort(Node** head){
+    if (*head == nullptr)
+    {
+      cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
+      return;
+    }
+
+    Node* outer_current = *head;
+    Node* inner_current = *head;
+    Node* last_correct = *head;
+    bool bUnordered = false;
+  
+    while(last_correct->ptrNext != nullptr) last_correct = last_correct->ptrNext;
+
+    while (outer_current->ptrNext != nullptr)
+    {
+        inner_current = *head;
+        bUnordered = false;
+        while (inner_current != last_correct)
+        {
+            if (inner_current->iPayload > inner_current->ptrNext->iPayload)
+            {
+                swapValue(inner_current->iPayload, inner_current->ptrNext->iPayload);
+            }
+            inner_current = inner_current->ptrNext;
+            bUnordered = true;
+        }
+        outer_current = outer_current->ptrNext;
+        last_correct = last_correct->ptrPrev;
+
+        if (bUnordered==false) break;
+    }
+}
+
+void selectionSort(Node** head)
+{
+    if (*head == nullptr)
+    {
+      cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
+      return;
+    }
+
+    Node* outer_current = *head;
+    Node* inner_current = nullptr;
+
+    while (outer_current->ptrNext != nullptr)
+    {
+        inner_current = outer_current->ptrNext;
+
+        while (inner_current != nullptr)
+        {
+            if (outer_current->iPayload > inner_current->iPayload)
+            {
+                swapValue(outer_current->iPayload, inner_current->iPayload);
+            }
+            inner_current = inner_current->ptrNext;
+        }
+
+        outer_current = outer_current->ptrNext;
+    }
+}
+
+void optimizedSelectionSort(Node** head)
+{   
+    if (*head == nullptr)
+    {
+      cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
+      return;
+    }
+
+    Node* outer_current = *head;
+    Node* inner_current = nullptr;
+    Node* swapPtr = nullptr;
+    int minValue = 0;
+    
+    while (outer_current->ptrNext != nullptr)
+    {
+        inner_current = outer_current->ptrNext;
+        minValue = outer_current->iPayload;
+
+        while (inner_current != nullptr)
+        {
+            if (minValue > inner_current->iPayload)
+            {
+                minValue = inner_current->iPayload;
+                swapPtr = inner_current;
+            }
+            inner_current = inner_current->ptrNext;
+        }
+
+        if (minValue < outer_current->iPayload) swapValue(outer_current->iPayload, swapPtr->iPayload);
+        outer_current = outer_current->ptrNext;
+    }
+}
+
+void deleteNode(Node** head, Node* ptrDelete)
+{
+    if (*head == nullptr || ptrDelete == nullptr)
+    {
+        cout << "Não foi posível remover." << endl;
+        return;
+    }
+    
+    // Caso o ptrDelete seja o primero elemento da lista
+    if (*head == ptrDelete) (*head) = ptrDelete->ptrNext;
+    
+    // Se o ptrDelete não é o último nó
+    if (ptrDelete->ptrNext != nullptr) ptrDelete->ptrNext->ptrPrev = ptrDelete->ptrPrev;
+    
+    // Se o ptrDelete não é o primeiro nó
+    if (ptrDelete->ptrPrev != nullptr) ptrDelete->ptrPrev->ptrNext = ptrDelete->ptrNext;
+
+    free(ptrDelete);
+}
