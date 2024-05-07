@@ -24,11 +24,8 @@ typedef struct Node
 Node* createNode(int);
 void insertFront(Node**, int);
 void insertEnd(Node**, int);
-void insertAfter(Node*, int);
 void displayList(Node*);
-void insertBefore(Node*, int);
-Node* searchNodebyValue(Node*, int);
-void deleteNodebyValue(Node**, int);
+void deleteList(Node** head);
 
 // Funções para Bubble e Selection Sort
 void swapValue(int&, int&);
@@ -39,38 +36,84 @@ void optimizedSelectionSort(Node**);
 
 int main()
 {
+    // Node* head = nullptr;
+    // displayList(head);
+    // bubbleSort(&head);
+    // cout << "==============" << endl;
+    // insertEnd(&head,10);
+    // insertEnd(&head,3);
+    // insertEnd(&head,1);
+    // insertEnd(&head,13);
+    // insertEnd(&head,0);
+    // insertEnd(&head,7);
+    // displayList(head);
+    // deleteList(&head);
+    // displayList(head);
+    // head = nullptr;
+    // insertEnd(&head,10);
+    // insertEnd(&head,3);
+    // insertEnd(&head,1);
+    // insertEnd(&head,13);
+    // insertEnd(&head,0);
+    // insertEnd(&head,7);
+    // displayList(head);;
+
+
+    // cout << "==============" << endl;
+    // selectionSort(&head);
+    // displayList(head);
+    // cout << "==============" << endl;
+
+    auto timeStart = high_resolution_clock::now();
+    auto timeStop = high_resolution_clock::now();
+    auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+
+    long int arriTempoBubble[10];
+    long int arriTempoBubbleOptimized[10];
+    long int arriTempoSelection[10];
+    long int arriTempoSelectionOptimized[10];
+
+    int randomValue;
     Node* head = nullptr;
-    displayList(head);
-    bubbleSort(&head);
-    cout << "==============" << endl;
-    insertEnd(&head,10);
-    insertEnd(&head,3);
-    insertEnd(&head,1);
-    insertEnd(&head,13);
-    insertEnd(&head,0);
-    insertEnd(&head,7);
-    displayList(head);
 
-    cout << "==============" << endl;
-    optimizedSelectionSort(&head);
-    displayList(head);
-    cout << "==============" << endl;
+    for (int iNumListas = 0; iNumListas<10; iNumListas++) // testando em 10 listas
+    {
+        head = nullptr;
+        for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores na lista
+        {
+            randomValue = rand() % 501;
+            insertEnd(&head, randomValue);
+        }
+        // tempo da bubble sort
+        timeStart = high_resolution_clock::now();
+        bubbleSort(&head);
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        arriTempoBubble[iNumListas] = timeDuration.count();
 
+        // tempo da bubble sort otimizada
+        timeStart = high_resolution_clock::now();
+        optimizedBubbleSort(&head);
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        arriTempoBubbleOptimized[iNumListas] = timeDuration.count();
 
-    // auto timeStart = high_resolution_clock::now();
-    // auto timeStop = high_resolution_clock::now();
-    // auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        // tempo da selection sort
+        timeStart = high_resolution_clock::now();
+        selectionSort(&head);
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        arriTempoSelection[iNumListas] = timeDuration.count();
 
-    // for (int iNumListas = 0; iNumListas<11; iNumListas++)
-    // {
-    //     Node* head = nullptr;
-    //     for (int iTamLista = 0; iTamLista < 10001; iTamLista++) // adicionando 10000 valores na lista
-    //     {
-    //         int randomValue = rand() % 501;
-    //         insertFront(&head, randomValue);
-    //     }
-        
-    // }
+        // tempo da selection sort otimizada
+        timeStart = high_resolution_clock::now();
+        optimizedSelectionSort(&head);
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        arriTempoSelectionOptimized[iNumListas] = timeDuration.count();
+
+        deleteList(&head);
+    }
     cout << "======================== FIM ========================" << endl;
     return 0;
 }
@@ -271,27 +314,22 @@ void optimizedSelectionSort(Node** head)
             inner_current = inner_current->ptrNext;
         }
 
+        // usando essa condição pois na última iteração faz uma troca indevida
         if (minValue < outer_current->iPayload) swapValue(outer_current->iPayload, swapPtr->iPayload);
         outer_current = outer_current->ptrNext;
     }
 }
 
-void deleteNode(Node** head, Node* ptrDelete)
+void deleteList(Node** head)
 {
-    if (*head == nullptr || ptrDelete == nullptr)
-    {
-        cout << "Não foi posível remover." << endl;
-        return;
-    }
-    
-    // Caso o ptrDelete seja o primero elemento da lista
-    if (*head == ptrDelete) (*head) = ptrDelete->ptrNext;
-    
-    // Se o ptrDelete não é o último nó
-    if (ptrDelete->ptrNext != nullptr) ptrDelete->ptrNext->ptrPrev = ptrDelete->ptrPrev;
-    
-    // Se o ptrDelete não é o primeiro nó
-    if (ptrDelete->ptrPrev != nullptr) ptrDelete->ptrPrev->ptrNext = ptrDelete->ptrNext;
+    Node* current = *head;
+    Node* next = nullptr;
 
-    free(ptrDelete);
+    while(current != nullptr)
+    {
+        next=current->ptrNext;
+        free(current);
+        current = next;
+    }
+    free(next);
 }
