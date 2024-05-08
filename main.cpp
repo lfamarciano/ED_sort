@@ -53,7 +53,6 @@ int main()
         timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
         arriTempoSelectionOptimized[iNumListas] = timeDuration.count();
 
-        cout << "Elemento " << iNumListas << ": " << arriTempoSelectionOptimized[iNumListas] << endl; 
         deleteList(&head);
 
     }
@@ -81,7 +80,7 @@ int main()
     cout << "Mediana: " << calcularMediana(arriTempoSelectionOptimized, tamanho) << endl;
     cout << "Moda: " << calcularModa(arriTempoSelectionOptimized, tamanho) << endl;
     cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoSelectionOptimized, tamanho) << endl;
-    
+
     cout << "======================== FIM ========================" << endl;
     return 0;
 }
