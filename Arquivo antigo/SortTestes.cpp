@@ -31,6 +31,7 @@ void deleteList(Node** head);
 void swapValue(int&, int&);
 void bubbleSort(Node**);
 void optimizedBubbleSort(Node**);
+void optimizedBubbleSort(int arriNumbers[], int iLength);
 void selectionSort(Node**);
 void optimizedSelectionSort(Node**);
 
@@ -68,10 +69,10 @@ int main()
     auto timeStop = high_resolution_clock::now();
     auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
 
-    long int arriTempoBubble[10];
-    long int arriTempoBubbleOptimized[10];
-    long int arriTempoSelection[10];
-    long int arriTempoSelectionOptimized[10];
+    long int arriTempoBubble[20];
+    long int arriTempoBubbleOptimized[20];
+    long int arriTempoSelection[20];
+    long int arriTempoSelectionOptimized[20];
 
     int randomValue;
     Node* head = nullptr;
@@ -256,6 +257,21 @@ void optimizedBubbleSort(Node** head){
         last_correct = last_correct->ptrPrev;
 
         if (bUnordered==false) break;
+    }
+}
+
+void optimizedBubbleSort(int arriNumbers[], int iLength){
+    bool bUnordered = false;
+    
+    for (int iOuterLoop=0; iOuterLoop<iLength-1; iOuterLoop++){
+        bUnordered = false;
+        for (int iInnerLoop=0; iInnerLoop<iLength-1-iOuterLoop; iInnerLoop++){
+            if (arriNumbers[iInnerLoop] > arriNumbers[iInnerLoop + 1])
+                swapValue(arriNumbers[iInnerLoop], arriNumbers[iInnerLoop + 1]);
+                bUnordered = true;
+        }
+        
+        if (bUnordered == false) break;
     }
 }
 
