@@ -1,7 +1,11 @@
 #include <iostream>
+#include <chrono>
 #include "estatistica_descritiva.h"
-#include "lista_duplamente_encadeada.h"
+#include "ListaDuplamenteEncadeada.h"
 #include "sort.h"
+
+using namespace std;
+using namespace std::chrono;
 
 int main()
 {
@@ -9,10 +13,11 @@ int main()
     auto timeStop = high_resolution_clock::now();
     auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
 
-    long int arriTempoBubble[20];
-    long int arriTempoBubbleOptimized[20];
-    long int arriTempoSelection[20];
-    long int arriTempoSelectionOptimized[20];
+    int arriTempoBubble[20];
+    int arriTempoBubbleOptimized[20];
+    int arriTempoSelection[20];
+    int arriTempoSelectionOptimized[20];
+
 
     int randomValue;
     Node* head = nullptr;
@@ -57,25 +62,25 @@ int main()
 
     }
     int tamanho = 20;
-    cout << "--------------Bubble Sort--------------" << endl
+    cout << "--------------Bubble Sort--------------" << endl;
     cout << "Média: " << calcularMedia(arriTempoBubble, tamanho) << endl;
     cout << "Mediana: " << calcularMediana(arriTempoBubble, tamanho) << endl;
     cout << "Moda: " << calcularModa(arriTempoBubble, tamanho) << endl;
     cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoBubble, tamanho) << endl;
 
-    cout << "--------------Bubble Sort Otimizado--------------" << endl
+    cout << "--------------Bubble Sort Otimizado--------------" << endl;
     cout << "Média: " << calcularMedia(arriTempoBubbleOptimized, tamanho) << endl;
     cout << "Mediana: " << calcularMediana(arriTempoBubbleOptimized, tamanho) << endl;
     cout << "Moda: " << calcularModa(arriTempoBubbleOptimized, tamanho) << endl;
     cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoBubbleOptimized, tamanho) << endl;
 
-    cout << "--------------Selection Sort--------------" << endl
+    cout << "--------------Selection Sort--------------" << endl;
     cout << "Média: " << calcularMedia(arriTempoSelection, tamanho) << endl;
     cout << "Mediana: " << calcularMediana(arriTempoSelection, tamanho) << endl;
     cout << "Moda: " << calcularModa(arriTempoSelection, tamanho) << endl;
     cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoSelection, tamanho) << endl;
 
-    cout << "--------------Selection Sort Otimizado--------------" << endl
+    cout << "--------------Selection Sort Otimizado--------------" << endl;
     cout << "Média: " << calcularMedia(arriTempoSelectionOptimized, tamanho) << endl;
     cout << "Mediana: " << calcularMediana(arriTempoSelectionOptimized, tamanho) << endl;
     cout << "Moda: " << calcularModa(arriTempoSelectionOptimized, tamanho) << endl;
