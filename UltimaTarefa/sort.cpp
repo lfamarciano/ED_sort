@@ -1,5 +1,7 @@
 #include "sort.h"
 
+using namespace std;
+
 void swapValue(int& irefValue1, int& irefValue2) {
     int iTemp = irefValue1;
     irefValue1 = irefValue2;

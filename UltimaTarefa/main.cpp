@@ -1,8 +1,8 @@
 #include <iostream>
 #include <chrono>
-#include "dubblelinkedlist.h"
-#include "bubble_sort.h"
-#include "selection_sort.h"
+#include "estatistica_descritiva.h"
+#include "ListaDuplamenteEncadeada.h"
+#include "sort.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -61,6 +61,31 @@ int main()
         deleteList(&head);
 
     }
-    
+    int tamanho = 20;
+    cout << "--------------Bubble Sort--------------" << endl;
+    cout << "Média: " << calcularMedia(arriTempoBubble, tamanho) << endl;
+    cout << "Mediana: " << calcularMediana(arriTempoBubble, tamanho) << endl;
+    cout << "Moda: " << calcularModa(arriTempoBubble, tamanho) << endl;
+    cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoBubble, tamanho) << endl;
+
+    cout << "--------------Bubble Sort Otimizado--------------" << endl;
+    cout << "Média: " << calcularMedia(arriTempoBubbleOptimized, tamanho) << endl;
+    cout << "Mediana: " << calcularMediana(arriTempoBubbleOptimized, tamanho) << endl;
+    cout << "Moda: " << calcularModa(arriTempoBubbleOptimized, tamanho) << endl;
+    cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoBubbleOptimized, tamanho) << endl;
+
+    cout << "--------------Selection Sort--------------" << endl;
+    cout << "Média: " << calcularMedia(arriTempoSelection, tamanho) << endl;
+    cout << "Mediana: " << calcularMediana(arriTempoSelection, tamanho) << endl;
+    cout << "Moda: " << calcularModa(arriTempoSelection, tamanho) << endl;
+    cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoSelection, tamanho) << endl;
+
+    cout << "--------------Selection Sort Otimizado--------------" << endl;
+    cout << "Média: " << calcularMedia(arriTempoSelectionOptimized, tamanho) << endl;
+    cout << "Mediana: " << calcularMediana(arriTempoSelectionOptimized, tamanho) << endl;
+    cout << "Moda: " << calcularModa(arriTempoSelectionOptimized, tamanho) << endl;
+    cout << "Desvio Padrão: " << calcularDesvioPadrao(arriTempoSelectionOptimized, tamanho) << endl;
+
+    cout << "======================== FIM ========================" << endl;
     return 0;
 }

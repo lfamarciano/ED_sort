@@ -1,8 +1,8 @@
 #pragma once
 
+#include <iostream>
 #include "ListaDuplamenteEncadeada.h"
 
-// Declaração das funções de ordenação
 void swapValue(int&, int&);
 void bubbleSort(Node**);
 void optimizedBubbleSort(Node**);

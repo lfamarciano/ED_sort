@@ -1,9 +1,9 @@
 #pragma once
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
+#pragma once
 
 typedef struct Node{
     int iPayload;
@@ -11,10 +11,11 @@ typedef struct Node{
     Node* ptrPrev;
 } Node;
 
-// Funções Lista Duplamente Encadeada 
 Node* createNode(int);
 void insertFront(Node**, int);
 void insertEnd(Node**, int);
 void displayList(Node*);
 void deleteList(Node**);
+void swapValue(int&, int&); //adicionei aqui para não ter que ficar definindo toda vez
 
+#endif

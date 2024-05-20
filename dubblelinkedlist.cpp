@@ -1,5 +1,14 @@
-#include "ListaDuplamenteEncadeada.h"
-#include <cstdlib> // Para a função malloc e free
+#include "dubblelinkedlist.h"
+
+#include <iostream>
+
+using namespace std;
+
+void swapValue(int& irefValue1, int& irefValue2) {
+    int iTemp = irefValue1;
+    irefValue1 = irefValue2;
+    irefValue2 = iTemp;
+}
 
 Node* createNode(int iPayload)
 {
