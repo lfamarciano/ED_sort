@@ -49,25 +49,44 @@ using namespace duracaoAlgoritmo;
 int main()
 {
     int randomValue;
-    Node* head = nullptr;
+    Node* head1 = nullptr;
+    Node* head2 = nullptr;
+    Node* head3 = nullptr;
+    Node* head4 = nullptr;
+    Node* head5 = nullptr;
+
     cout << "BubbleSort; BubbleSortOtimizado; SelectionSort; SelectionSortOtimizado; InserionSort" << endl;
 
     for (int iNumListas = 0; iNumListas<100; iNumListas++) // testando em 100 listas
     {
-        head = nullptr;
+        head1 = nullptr;
+        head2 = nullptr;
+        head3 = nullptr;
+        head4 = nullptr;
+        head5 = nullptr;
+
         for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores na lista
         {
             randomValue = rand() % 20000;
-            insertEnd(&head, randomValue);
-        }
-        cout << tempoExecucao(head, BubbleSort) << ";";
-        cout << tempoExecucao(head, BubbleSortOtimizado) << ";";
-        cout << tempoExecucao(head, SelectionSort) << ";";
-        cout << tempoExecucao(head, SelectionSortOtimizado) << ";";
-        cout << tempoExecucao(head, InsertionSort) << endl;
 
-        deleteList(&head);
-        
+            //cria 5 listas iguais
+            insertEnd(&head1, randomValue);
+            insertEnd(&head2, randomValue);
+            insertEnd(&head3, randomValue);
+            insertEnd(&head4, randomValue);
+            insertEnd(&head5, randomValue);
+        }
+        cout << tempoExecucao(head1, BubbleSort) << ";";
+        cout << tempoExecucao(head2, BubbleSortOtimizado) << ";";
+        cout << tempoExecucao(head3, SelectionSort) << ";";
+        cout << tempoExecucao(head4, SelectionSortOtimizado) << ";";
+        cout << tempoExecucao(head5, InsertionSort) << endl;
+
+        deleteList(&head1);
+        deleteList(&head2);
+        deleteList(&head3);
+        deleteList(&head4);
+        deleteList(&head5);
     
     }
     
