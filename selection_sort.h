@@ -5,7 +5,7 @@
 
 #include "dubblelinkedlist.h"
 
-void selectionSort(Node**);
-void optimizedSelectionSort(Node**);
+void selectionSort(Node*);
+void optimizedSelectionSort(Node*);
 
 #endif

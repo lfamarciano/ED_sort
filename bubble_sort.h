@@ -5,7 +5,7 @@
 
 #include "dubblelinkedlist.h"
 
-void bubbleSort(Node**);
-void optimizedBubbleSort(Node**);
+void bubbleSort(Node*);
+void optimizedBubbleSort(Node*);
 
 #endif
