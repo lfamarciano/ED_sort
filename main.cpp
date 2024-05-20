@@ -23,13 +23,13 @@ namespace duracaoAlgoritmo
                 bubbleSort(head);
                 break;
             case BubbleSortOtimizado:
-                bubbleSortOtimizado(head);
+                optimizedBubbleSort(head);
                 break;
             case SelectionSort:
                 selectionSort(head);
                 break;
             case SelectionSortOtimizado:
-                selectionSortOtimizado(head);
+                optimizedSelectionSort(head);
                 break;
             case InsertionSort:
                 insertionSort(head);
@@ -64,7 +64,7 @@ int main()
         cout << tempoExecucao(head, BubbleSortOtimizado) << ";";
         cout << tempoExecucao(head, SelectionSort) << ";";
         cout << tempoExecucao(head, SelectionSortOtimizado) << ";";
-        cout << tempoExecucao(head, InserionSort) << endl;
+        cout << tempoExecucao(head, InsertionSort) << endl;
 
         deleteList(&head);
         

@@ -10,7 +10,6 @@ void insertionSort(Node* head) {
         return;
     }
     
-    int temp;
     Node* ptrOuter = head->ptrNext;
 
     while(ptrOuter != nullptr) {
@@ -24,6 +23,6 @@ void insertionSort(Node* head) {
             ptrInner = ptrInner->ptrPrev;
         }
         
-        ptrOuter = ptrOuter->ptrNext;
+    ptrOuter = ptrOuter->ptrNext;
     }
 }
