@@ -67,7 +67,7 @@ int main()
 
         for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores na lista
         {
-            randomValue = rand() % 20000;
+            randomValue = rand() % 100;
 
             //cria 5 listas iguais
             insertEnd(&head1, randomValue);
