@@ -4,21 +4,22 @@
 
 using namespace std;
 
-void selectionSort(Node* head) {
+template <typename T>
+void selectionSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
         return;
     }
 
-    Node* ptrOuter = head;
-    Node* ptrInner = nullptr;
+    Node<T>* ptrOuter = head;
+    Node<T>* ptrInner = nullptr;
 
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = ptrOuter->ptrNext;
 
         while (ptrInner != nullptr) {
-            if (ptrOuter->iPayload > ptrInner->iPayload) {
-                swapValue(ptrOuter->iPayload, ptrInner->iPayload);
+            if (ptrOuter->payload > ptrInner->payload) {
+                swapValue(ptrOuter->payload, ptrInner->payload);
             }
             ptrInner = ptrInner->ptrNext;
         }
@@ -27,31 +28,32 @@ void selectionSort(Node* head) {
     }
 }
 
-void optimizedSelectionSort(Node* head) {
+template <typename T>
+void optimizedSelectionSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
         return;
     }
 
-    Node* ptrOuter = head;
-    Node* ptrInner = nullptr;
-    Node* ptrSwap = nullptr;
+    Node<T>* ptrOuter = head;
+    Node<T>* ptrInner = nullptr;
+    Node<T>* ptrSwap = nullptr;
     int minValue = 0;
 
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = ptrOuter->ptrNext;
-        minValue = ptrOuter->iPayload;
+        minValue = ptrOuter->payload;
 
         while (ptrInner != nullptr) {
-            if (minValue > ptrInner->iPayload) {
-                minValue = ptrInner->iPayload;
+            if (minValue > ptrInner->payload) {
+                minValue = ptrInner->payload;
                 ptrSwap = ptrInner;
             }
             ptrInner = ptrInner->ptrNext;
         }
 
         // usando essa condição pois na última iteração faz uma troca indevida
-        if (minValue < ptrOuter->iPayload) swapValue(ptrOuter->iPayload, ptrSwap->iPayload);
+        if (minValue < ptrOuter->payload) swapValue(ptrOuter->payload, ptrSwap->payload);
         ptrOuter = ptrOuter->ptrNext;
     }
 }

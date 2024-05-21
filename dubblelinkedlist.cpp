@@ -4,28 +4,31 @@
 
 using namespace std;
 
-void swapValue(int& irefValue1, int& irefValue2) {
-    int iTemp = irefValue1;
-    irefValue1 = irefValue2;
-    irefValue2 = iTemp;
+template <typename T>
+void swapValue(T& refValue1, T& refValue2) {
+    T temp = refValue1;
+    refValue1 = refValue2;
+    refValue2 = temp;
 }
 
-Node* createNode(int iPayload)
+template <typename T>
+Node<T>* createNode(T payload)
 {
-    Node* temp = (Node*)malloc(sizeof(Node));
-    temp->iPayload = iPayload;
+    Node<T>* temp = new Node<T>;
+    temp->payload = payload;
     temp->ptrNext = nullptr;
     temp->ptrPrev = nullptr;
     
     return temp;
 }
 
-void displayList(Node* node)
+template <typename T>
+void displayList(Node<T>* node)
 {
     if (node == nullptr)
     {
         cout << "Lista vazia: Não é possível realizar displayList" << endl;
-        return; // Usa return pra sair da função, o resto do código não será executado
+        return;
     }
     
     if (node->ptrPrev != nullptr)
@@ -34,22 +37,23 @@ void displayList(Node* node)
         return;
     }
     
-    Node* temp = node;
+    Node<T>* temp = node;
      
     cout << "Payload: ";
     
     while(temp != nullptr)
     {
-        cout << temp->iPayload << " ";
+        cout << temp->payload << " ";
         temp = temp->ptrNext;
     }
     
     cout << endl;
 }
 
-void insertFront(Node** head, int iPayload)
+template <typename T>
+void insertFront(Node<T>** head, T payload)
 {
-    Node* newNode = createNode(iPayload);
+    Node<T>* newNode = createNode(payload);
     
     if (*head != nullptr)
     {
@@ -59,9 +63,10 @@ void insertFront(Node** head, int iPayload)
     *head = newNode;
 }
 
-void insertEnd(Node** head, int iPayload)
+template <typename T>
+void insertEnd(Node<T>** head, T payload)
 {
-    Node* newNode = createNode(iPayload);
+    Node<T>* newNode = createNode(payload);
     
     if (*head == nullptr)
     {
@@ -69,25 +74,26 @@ void insertEnd(Node** head, int iPayload)
         return;
     }
   
-    Node* temp = *head;
+    Node<T>* temp = *head;
   
-    // Percorremos a lista até seu fim(ptrNext do último nó é NULL)
+    // Percorre a lista até seu fim (ptrNext do último nó é NULL)
     while(temp->ptrNext != nullptr) temp = temp->ptrNext;
   
     newNode->ptrPrev = temp; // newNode aponta para o fim da lista
     temp->ptrNext = newNode; // Antigo último elemento aponta para o novo nó
 }
 
-void deleteList(Node** head)
+template <typename T>
+void deleteList(Node<T>** head)
 {
-    Node* current = *head;
-    Node* next = nullptr;
+    Node<T>* current = *head;
+    Node<T>* next = nullptr;
 
     while(current != nullptr)
     {
         next = current->ptrNext;
-        free(current);
+        delete current;
         current = next;
     }
-    *head = nullptr; // Garanta que o ponteiro da lista aponte para null após a deleção
+    *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
 }

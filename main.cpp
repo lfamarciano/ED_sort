@@ -14,7 +14,8 @@ namespace duracaoAlgoritmo
 {
     enum Algoritmo {BubbleSort, BubbleSortOtimizado, SelectionSort, SelectionSortOtimizado, InsertionSort, BucketSort};
 
-    float tempoExecucao(Node* head, Algoritmo algoritmo)
+    template <typename T>
+    float tempoExecucao(Node<T>* head, Algoritmo algoritmo)
     {
         auto timeStart = high_resolution_clock::now();
         
@@ -53,12 +54,12 @@ using namespace duracaoAlgoritmo;
 int main()
 {
     int randomValue;
-    Node* head1 = nullptr;
-    Node* head2 = nullptr;
-    Node* head3 = nullptr;
-    Node* head4 = nullptr;
-    Node* head5 = nullptr;
-    Node* head6 = nullptr;
+    Node<int>* head1 = nullptr;
+    Node<int>* head2 = nullptr;
+    Node<int>* head3 = nullptr;
+    Node<int>* head4 = nullptr;
+    Node<int>* head5 = nullptr;
+    Node<int>* head6 = nullptr;
 
     cout << "BubbleSort; BubbleSortOtimizado; SelectionSort; SelectionSortOtimizado; InsertionSort; BucketSort" << endl;
 

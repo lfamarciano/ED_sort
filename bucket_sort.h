@@ -6,7 +6,10 @@
 #include "dubblelinkedlist.h"
 #include "insertion_sort.h"
 
-void bucketSort(Node* head);
-void insertBucket(Node* head, int value);
+template <typename T>
+void bucketSort(Node<T>* head);
+
+template <typename T>
+void insertBucket(Node<T>* head, int value);
 
 #endif

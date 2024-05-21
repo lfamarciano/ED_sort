@@ -4,28 +4,30 @@
 
 using namespace std;
 
-void insertBucket(Node** head, int value) {
+template <typename T>
+void insertBucket(Node<T>** head, T value) {
 
     insertEnd(head, value);
 
     return;
 }
 
-void bucketSort(Node* head) {
+template <typename T>
+void bucketSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar bucketSort" << endl;
         return;
     }
 
     int iBucketCount = 10;  // Número de buckets
-    Node* buckets[iBucketCount] = {nullptr};
+    Node<T>* buckets[iBucketCount] = {nullptr};
 
     // Encontra o valor máximo na lista para definir o intervalo dos buckets
-    int iMaxValue = head->iPayload;
-    Node* ptrCurrent = head->ptrNext;
+    int iMaxValue = head->payload;
+    Node<T>* ptrCurrent = head->ptrNext;
     while (ptrCurrent != nullptr) {
-        if (ptrCurrent->iPayload > iMaxValue) {
-            iMaxValue = ptrCurrent->iPayload;
+        if (ptrCurrent->payload > iMaxValue) {
+            iMaxValue = ptrCurrent->payload;
         }
         ptrCurrent = ptrCurrent->ptrNext;
     }
@@ -35,8 +37,8 @@ void bucketSort(Node* head) {
     // Distribui os elementos nos buckets
     ptrCurrent = head;
     while (ptrCurrent != nullptr) {
-        iBucketIndex = (ptrCurrent->iPayload * iBucketCount) / (iMaxValue + 1);
-        insertBucket(&buckets[iBucketIndex], ptrCurrent->iPayload);
+        iBucketIndex = (ptrCurrent->payload * iBucketCount) / (iMaxValue + 1);
+        insertBucket(&buckets[iBucketIndex], ptrCurrent->payload);
         ptrCurrent = ptrCurrent->ptrNext;
     }
 
@@ -45,7 +47,7 @@ void bucketSort(Node* head) {
         insertionSort(buckets[i]);
     }
 
-    Node* ptrBucket = nullptr;
+    Node<T>* ptrBucket = nullptr;
     ptrCurrent = head;
 
     //Aqui, trocaremos as cargas com base nos buckets
@@ -53,7 +55,7 @@ void bucketSort(Node* head) {
         if (buckets[i] != nullptr) {
             ptrBucket = buckets[i];
             while (ptrBucket != nullptr) {
-                    ptrCurrent->iPayload = ptrBucket->iPayload;
+                    ptrCurrent->payload = ptrBucket->payload;
                     ptrCurrent = ptrCurrent->ptrNext;
                     ptrBucket = ptrBucket->ptrNext;
                 }

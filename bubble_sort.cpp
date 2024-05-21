@@ -4,20 +4,21 @@
 
 using namespace std;
 
-void bubbleSort(Node* head) {
+template <typename T>
+void bubbleSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
         return;
     }
 
-    Node* ptrOuter = head;
-    Node* ptrInner = head;
+    Node<T>* ptrOuter = head;
+    Node<T>* ptrInner = head;
 
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = head;
         while (ptrInner->ptrNext != nullptr) {
-            if (ptrInner->iPayload > ptrInner->ptrNext->iPayload) {
-                swapValue(ptrInner->iPayload, ptrInner->ptrNext->iPayload);
+            if (ptrInner->payload > ptrInner->ptrNext->payload) {
+                swapValue(ptrInner->payload, ptrInner->ptrNext->payload);
             }
             ptrInner = ptrInner->ptrNext;
         }
@@ -25,15 +26,16 @@ void bubbleSort(Node* head) {
     }
 }
 
-void optimizedBubbleSort(Node* head) {
+template <typename T>
+void optimizedBubbleSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
         return;
     }
 
-    Node* ptrOuter = head;
-    Node* ptrInner = head;
-    Node* last_correct = head;
+    Node<T>* ptrOuter = head;
+    Node<T>* ptrInner = head;
+    Node<T>* last_correct = head;
     bool bUnordered = false;
 
     while (last_correct->ptrNext != nullptr) last_correct = last_correct->ptrNext;
@@ -42,8 +44,8 @@ void optimizedBubbleSort(Node* head) {
         ptrInner = head;
         bUnordered = false;
         while (ptrInner != last_correct) {
-            if (ptrInner->iPayload > ptrInner->ptrNext->iPayload) {
-                swapValue(ptrInner->iPayload, ptrInner->ptrNext->iPayload);
+            if (ptrInner->payload > ptrInner->ptrNext->payload) {
+                swapValue(ptrInner->payload, ptrInner->ptrNext->payload);
             }
             ptrInner = ptrInner->ptrNext;
             bUnordered = true;

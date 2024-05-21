@@ -5,17 +5,29 @@
 
 #pragma once
 
-typedef struct Node{
-    int iPayload;
+template <typename T>
+struct Node{
+    T payload;
     Node* ptrNext;
     Node* ptrPrev;
-} Node;
+};
 
-Node* createNode(int);
-void insertFront(Node**, int);
-void insertEnd(Node**, int);
-void displayList(Node*);
-void deleteList(Node**);
-void swapValue(int&, int&); //adicionei aqui para não ter que ficar definindo toda vez
+template <typename T>
+void swapValue(T& refValue1, T& refValue2);
+
+template <typename T>
+Node<T>* createNode(T payload);
+
+template <typename T>
+void displayList(Node<T>* node);
+
+template <typename T>
+void insertFront(Node<T>** head, T payload);
+
+template <typename T>
+void insertEnd(Node<T>** head, T payload);
+
+template <typename T>
+void deleteList(Node<T>** head);
 
 #endif

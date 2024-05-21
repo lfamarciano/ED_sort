@@ -4,20 +4,21 @@
 
 using namespace std;
 
-void insertionSort(Node* head) {
+template <typename T>
+void insertionSort(Node<T>* head) {
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar insertionSort" << endl;
         return;
     }
     
-    Node* ptrOuter = head->ptrNext;
+    Node<T>* ptrOuter = head->ptrNext;
 
     while(ptrOuter != nullptr) {
-        Node* ptrInner = ptrOuter->ptrPrev;
-        Node* current = ptrOuter;
+        Node<T>* ptrInner = ptrOuter->ptrPrev;
+        Node<T>* current = ptrOuter;
         
-        while(ptrInner != nullptr && ptrInner->iPayload > current->iPayload) {
-            swapValue(current->iPayload, ptrInner->iPayload);
+        while(ptrInner != nullptr && ptrInner->payload > current->payload) {
+            swapValue(current->payload, ptrInner->payload);
             
             current = ptrInner;
             ptrInner = ptrInner->ptrPrev;
