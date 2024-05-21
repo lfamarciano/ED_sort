@@ -30,7 +30,6 @@ void bucketSort(Node* head) {
         ptrCurrent = ptrCurrent->ptrNext;
     }
 
-    Node* ptrNext;
     int iBucketIndex;
 
     // Distribui os elementos nos buckets
@@ -46,41 +45,22 @@ void bucketSort(Node* head) {
         insertionSort(buckets[i]);
     }
 
-    Node* ptrNewHead = nullptr;
-    Node* ptrLast = nullptr;
+    Node* ptrBucket = nullptr;
+    ptrCurrent = head;
 
-    //Aqui, faremos um bucket apontar para o outro, formando apeans uma lista
+    //Aqui, trocaremos as cargas com base nos buckets
     for (int i = 0; i < iBucketCount; ++i) {
         if (buckets[i] != nullptr) {
-            // Primeiro bucket
-            if (ptrNewHead == nullptr) {
-                ptrNewHead = buckets[i];
-                ptrLast = buckets[i];
-                // Acha o último elemento do bucket
-                while (ptrLast->ptrNext != nullptr) {
-                    ptrLast = ptrLast->ptrNext;
+            ptrBucket = buckets[i];
+            while (ptrBucket != nullptr) {
+                    ptrCurrent->iPayload = ptrBucket->iPayload;
+                    ptrCurrent = ptrCurrent->ptrNext;
+                    ptrBucket = ptrBucket->ptrNext;
                 }
-            } 
-            // Outros buckets além do primeiro
-            else {
-                ptrLast->ptrNext = buckets[i];
-                buckets[i]->ptrPrev = ptrLast;
-                while (ptrLast->ptrNext != nullptr) {
-                    ptrLast = ptrLast->ptrNext;
-                }
-            }
+            
+            deleteList(&buckets[i]);
         }
     }
 
-    // Copia os valores ordenados de volta para a lista original
-    ptrCurrent = head;
-    Node* ptrBucketCurrent = ptrNewHead;
-    while (ptrBucketCurrent != nullptr) {
-        ptrCurrent->iPayload = ptrBucketCurrent->iPayload;
-        ptrCurrent = ptrCurrent->ptrNext;
-        ptrBucketCurrent = ptrBucketCurrent->ptrNext;
-    }
-
-    // Libera a memória dos nós temporários criados nos buckets (estão todos em uma lista)
-    deleteList(&ptrNewHead);
+    return;
 }
