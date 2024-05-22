@@ -97,3 +97,11 @@ void deleteList(Node<T>** head)
     }
     *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
 }
+
+// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+template void swapValue<int>(int&, int&);
+template Node<int>* createNode<int>(int);
+template void displayList<int>(Node<int>*);
+template void insertFront<int>(Node<int>**, int);
+template void insertEnd<int>(Node<int>**, int);
+template void deleteList<int>(Node<int>**);

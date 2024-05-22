@@ -56,3 +56,8 @@ void optimizedBubbleSort(Node<T>* head) {
         if (bUnordered == false) break;
     }
 }
+
+// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+template void optimizedBubbleSort<int>(Node<int>*);
+template void bubbleSort<int>(Node<int>*);
+

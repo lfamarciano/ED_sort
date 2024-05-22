@@ -1,4 +1,5 @@
 #include "bucket_sort.h"
+#include "dubblelinkedlist.h"
 
 #include <iostream>
 
@@ -66,3 +67,9 @@ void bucketSort(Node<T>* head) {
 
     return;
 }
+
+// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+template void insertBucket<int>(Node<int>**, int);
+template void bucketSort<int>(Node<int>*);
+
+

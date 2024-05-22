@@ -57,3 +57,7 @@ void optimizedSelectionSort(Node<T>* head) {
         ptrOuter = ptrOuter->ptrNext;
     }
 }
+
+// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+template void selectionSort<int>(Node<int>*);
+template void optimizedSelectionSort<int>(Node<int>*);
