@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
-#include "dubblelinkedlist.h"
-#include "bubble_sort.h"
-#include "selection_sort.h"
-#include "insertion_sort.h"
-#include "bucket_sort.h"
+#include "doubleLinkedList/dubblelinkedlist.h"
+#include "sortingAlgorithms/bubble_sort.h"
+#include "sortingAlgorithms/selection_sort.h"
+#include "sortingAlgorithms/insertion_sort.h"
+#include "sortingAlgorithms/bucket_sort.h"
 
 using namespace std;
 using namespace std::chrono;

@@ -1,5 +1,5 @@
 #include "bucket_sort.h"
-#include "dubblelinkedlist.h"
+#include "../doubleLinkedList/dubblelinkedlist.h"
 
 #include <iostream>
 

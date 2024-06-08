@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dubblelinkedlist.h"
+#include "../doubleLinkedList/dubblelinkedlist.h"
 
 #ifndef INSERTIONSORT_H
 #define INSERTIONSORT_H

@@ -1,4 +1,5 @@
 #include "dubblelinkedlist.h"
+#include "../trees/binarytree.h"
 
 #include <iostream>
 
@@ -98,6 +99,40 @@ void deleteList(Node<T>** head)
     *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
 }
 
+template <typename T>
+void deleteFirst(Node<T>** head)
+{
+    cout << "delete opa" << endl;
+    if (head == nullptr){
+        cout << "Não é possível fazer a operação de deleção." << endl;
+        return;
+    }
+    cout << "delete opa1" << endl;
+    
+    // Garante que vamos deletar o primeiro elemento.
+    Node<T>* ptrDelete = (*head);
+    cout << "delete opa2" << endl;
+
+    if ((*head) -> ptrNext  == nullptr){
+        delete ptrDelete;
+        return;
+    }
+
+    if (ptrDelete == (*head)){
+        cout << "delete opa3" << endl;
+        cout << (*head)->ptrNext << endl;
+        (*head)->ptrNext->ptrPrev = nullptr;
+        (*head) = (*head)->ptrNext;
+        
+
+        delete ptrDelete;
+    } else {
+        cout << "Algo deu errado." << endl;
+    }
+
+    return;
+}
+
 // fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
 template void swapValue<int>(int&, int&);
 template Node<int>* createNode<int>(int);
@@ -105,3 +140,7 @@ template void displayList<int>(Node<int>*);
 template void insertFront<int>(Node<int>**, int);
 template void insertEnd<int>(Node<int>**, int);
 template void deleteList<int>(Node<int>**);
+template void deleteFirst<NodeTree<int>*>(Node<NodeTree<int>*>**);
+
+template Node<NodeTree<int>>* createNode<NodeTree<int>>(NodeTree<int>);
+template void insertEnd<NodeTree<int>*>(Node<NodeTree<int>*>**, NodeTree<int>*);

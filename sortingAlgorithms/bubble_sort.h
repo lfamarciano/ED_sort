@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "dubblelinkedlist.h"
+#include "../doubleLinkedList/dubblelinkedlist.h"
 
 template <typename T>
 void bubbleSort(Node<T>*);

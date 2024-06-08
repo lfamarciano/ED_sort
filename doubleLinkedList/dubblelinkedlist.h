@@ -30,4 +30,7 @@ void insertEnd(Node<T>** head, T payload);
 template <typename T>
 void deleteList(Node<T>** head);
 
+template <typename T>
+void deleteFirst(Node<T>** head);
+
 #endif
