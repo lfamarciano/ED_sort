@@ -35,10 +35,8 @@ void optimizedBubbleSort(Node<T>* head) {
 
     Node<T>* ptrOuter = head;
     Node<T>* ptrInner = head;
-    Node<T>* last_correct = head;
+    Node<T>* last_correct = head -> ptrPrev;
     bool bUnordered = false;
-
-    while (last_correct->ptrNext != nullptr) last_correct = last_correct->ptrNext;
 
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = head;
