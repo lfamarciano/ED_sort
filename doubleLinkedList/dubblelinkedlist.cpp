@@ -60,8 +60,11 @@ void insertFront(Node<T>** head, T payload)
     {
         (*head)->ptrPrev = newNode;
         newNode->ptrNext = (*head);
+        (*head) = newNode;
+        return;
     }
-    *head = newNode;
+    
+    (*head) = newNode;
 }
 
 template <typename T>
