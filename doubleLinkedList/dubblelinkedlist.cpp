@@ -32,7 +32,7 @@ void displayList(Node<T>* node)
         return;
     }
     
-    if (node->ptrPrev != nullptr)
+    if (node->ptrPrev->ptrNext != nullptr)
     {
         cout << "Meio ou Fim da Lista: Não é possível realizar displayList" << endl;
         return;
@@ -56,15 +56,19 @@ void insertFront(Node<T>** head, T payload)
 {
     Node<T>* newNode = createNode(payload);
     
-    if (*head != nullptr)
-    {
-        (*head)->ptrPrev = newNode;
-        newNode->ptrNext = (*head);
+    if ((*head) == nullptr)
+    {   
         (*head) = newNode;
+        (*head)-> ptrPrev = (*head); //para acessar o último elemento
         return;
     }
     
+    newNode->ptrPrev = (*head) -> ptrPrev; //para acessar o último elemento
+    (*head)->ptrPrev = newNode;
+    newNode->ptrNext = (*head);
     (*head) = newNode;
+
+    return;
 }
 
 template <typename T>
@@ -72,19 +76,48 @@ void insertEnd(Node<T>** head, T payload)
 {
     Node<T>* newNode = createNode(payload);
     
-    if (*head == nullptr)
+    if ((*head) == nullptr)
     {
-        *head = newNode;
+        (*head) = newNode;
+        (*head)-> ptrPrev = (*head);
         return;
     }
   
-    Node<T>* temp = *head;
-  
-    // Percorre a lista até seu fim (ptrNext do último nó é NULL)
-    while(temp->ptrNext != nullptr) temp = temp->ptrNext;
-  
-    newNode->ptrPrev = temp; // newNode aponta para o fim da lista
-    temp->ptrNext = newNode; // Antigo último elemento aponta para o novo nó
+    Node<T>* last = (*head) -> ptrPrev;
+    
+    (*head) -> ptrPrev = newNode; //para acessar o último elemento
+
+    newNode->ptrPrev = last; // newNode aponta para o fim da lista
+    last->ptrNext = newNode; // Antigo último elemento aponta para o novo nó
+
+    return;
+}
+
+template <typename T>
+Node<T>* searchNodebyValue(Node<T>* head, T value)
+{
+    if (head == nullptr)
+    {
+        //newNode -> ptrNext = nullptr; Essa linha não é obrigatória pois já definimos anteriormente
+        // cout << "Ponteiro head é nulo" << endl;
+        return nullptr;
+    }
+    
+    Node<T>* temp = head;
+    
+    //Percorremos a lista até achar algum valor correspondênte ou até seu fim
+    while(temp != nullptr && temp->payload != value) 
+    {
+        temp = temp->ptrNext;
+    }
+    
+    if (temp == nullptr)
+    {
+        // cout << "Não tem nó com esse valor!" << endl;
+        return nullptr;
+    }
+
+    return temp;
 }
 
 
@@ -128,7 +161,7 @@ void deleteList(Node<T>** head)
         delete current;
         current = next;
     }
-    *head = nullptr;
+    *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
 }
 
 template <typename T>
@@ -139,16 +172,15 @@ void deleteFirst(Node<T>** head)
         return;
     }
     
-    // Garante que vamos deletar o primeiro elemento.
     Node<T>* ptrDelete = (*head);
 
-    if ((*head) -> ptrNext == nullptr){
+    if ((*head)->ptrNext == nullptr){
         delete ptrDelete;
         (*head) = nullptr;
         return;
     }
 
-    (*head)->ptrNext->ptrPrev = nullptr;
+    (*head)->ptrNext->ptrPrev = (*head)->ptrPrev;
     (*head) = (*head)->ptrNext;
 
     delete ptrDelete;
@@ -164,6 +196,7 @@ template void insertFront<int>(Node<int>**, int);
 template void insertEnd<int>(Node<int>**, int);
 template void deleteList<int>(Node<int>**);
 template void deleteFirst<NodeTree<int>*>(Node<NodeTree<int>*>**);
+template Node<int>* searchNodebyValue<int>(Node<int>*, int);
 
 template Node<NodeTree<int>>* createNode<NodeTree<int>>(NodeTree<int>);
 template void insertEnd<NodeTree<int>*>(Node<NodeTree<int>*>**, NodeTree<int>*);
