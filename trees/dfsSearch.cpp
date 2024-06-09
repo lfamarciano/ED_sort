@@ -8,16 +8,14 @@ using namespace std;
 template <typename T>
 NodeTree<T>* dfsSearch(NodeTree<T>* startingNode, T target)
 {
-    if (startingNode == nullptr) return nullptr;  // Caso base: nó nulo
+    if (startingNode == nullptr) return nullptr;
 
-    if (startingNode->payload == target) return startingNode;  // Encontrou o alvo
+    if (startingNode->payload == target) return startingNode;
 
-    // Buscar na subárvore esquerda
     NodeTree* result = dfsSearch(startingNode->ptrLeft, target);
-    if (result != nullptr) return result;  // Encontrou na subárvore esquerda
+    if (result != nullptr) return result;
 
-    // Buscar na subárvore direita
-    return dfsSearch(startingNode->ptrRight, target);  // Resultado da subárvore direita
+    return dfsSearch(startingNode->ptrRight, target);
 }
 
 // fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação

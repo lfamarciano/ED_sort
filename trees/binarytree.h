@@ -23,6 +23,9 @@ template <typename T>
 NodeTree<T>* insertNodeTree(NodeTree<T>*, T);
 
 template <typename T>
+void deleteTree(NodeTree<T>**);
+
+template <typename T>
 void bfsTraversal(NodeTree<T>*);
 
 // #include "binarytree.tpp"

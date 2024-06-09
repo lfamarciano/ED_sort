@@ -99,7 +99,7 @@ void deleteList(Node<T>** head)
         delete current;
         current = next;
     }
-    *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
+    *head = nullptr;
 }
 
 template <typename T>

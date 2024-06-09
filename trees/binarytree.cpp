@@ -19,6 +19,13 @@ int main()
     bfsTraversal(root);
     cout << endl;
 
+    deleteTree(&root);
+    // cout << root->ptrLeft->payload << endl;
+    // root = nullptr;
+    cout << "BFS Traversal: ";
+    bfsTraversal(root);
+    cout << endl;
+
     return 0;
 }
 
@@ -60,13 +67,30 @@ NodeTree<T>* insertNodeTree(NodeTree<T>*  startingNode, T data)
     return startingNode;
 }
 
+
+template <typename T>
+void deleteTree(NodeTree<T>** startingNode) {
+    if ((*startingNode)->ptrLeft != nullptr){
+        deleteTree(&((*startingNode)->ptrLeft));
+    }
+
+    if ((*startingNode)->ptrRight != nullptr){
+        deleteTree(&((*startingNode)->ptrRight));
+    }
+
+    delete (*startingNode);
+    (*startingNode) = nullptr;
+
+}
+
+
 template <typename T>
 void bfsTraversal(NodeTree<T>* startingNode)
 {
     if (startingNode == nullptr) return;
 
     Node<NodeTree<T>*>* head = nullptr; 
-    NodeTree<T>*  currentNode = nullptr;
+    NodeTree<T>* currentNode = nullptr;
 
     insertEnd(&head, startingNode);
 
@@ -96,4 +120,5 @@ void bfsTraversal(NodeTree<T>* startingNode)
 
 template NodeTree<int>* createNodeTree(int);
 template NodeTree<int>* insertNodeTree(NodeTree<int>*, int);
+template void deleteTree(NodeTree<int>**);
 template void bfsTraversal(NodeTree<int>*);
