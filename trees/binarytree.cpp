@@ -63,10 +63,7 @@ NodeTree<T>* insertNodeTree(NodeTree<T>*  startingNode, T data)
 template <typename T>
 void bfsTraversal(NodeTree<T>* startingNode)
 {
-    cout << "opa3" << endl;
-
     if (startingNode == nullptr) return;
-    cout << "opa4" << endl;
 
     Node<NodeTree<T>*>* head = nullptr; 
     NodeTree<T>*  currentNode = nullptr;
@@ -75,29 +72,26 @@ void bfsTraversal(NodeTree<T>* startingNode)
 
     while (head != nullptr)
     {   
-        cout << "opaa" << endl;
         currentNode = head->payload;
-        cout << "opal" << endl;
-        cout << head-> ptrNext << endl;
-        
 
-        cout << "opa" << endl;
-        cout << currentNode->payload << " ";
+        cout << currentNode -> payload << " ";
         
         if (currentNode->ptrLeft != nullptr)
-        {
+        {   
             insertEnd(&head, currentNode -> ptrLeft);
         }
         
         if (currentNode->ptrRight != nullptr)
-        {
+        {   
             insertEnd(&head, currentNode -> ptrRight);
         }
-        cout << "head: "<< head->ptrNext->payload->payload<< endl;
+
         deleteFirst(&head);
-        head = head -> ptrNext;
     }
+
     cout << endl;
+
+    //displayList(head); //Para verificar que a lista está sendo apagada
 }
 
 template NodeTree<int>* createNodeTree(int);

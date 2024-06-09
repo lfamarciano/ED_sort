@@ -102,33 +102,24 @@ void deleteList(Node<T>** head)
 template <typename T>
 void deleteFirst(Node<T>** head)
 {
-    cout << "delete opa" << endl;
     if (head == nullptr){
         cout << "Não é possível fazer a operação de deleção." << endl;
         return;
     }
-    cout << "delete opa1" << endl;
     
     // Garante que vamos deletar o primeiro elemento.
     Node<T>* ptrDelete = (*head);
-    cout << "delete opa2" << endl;
 
-    if ((*head) -> ptrNext  == nullptr){
+    if ((*head) -> ptrNext == nullptr){
         delete ptrDelete;
+        (*head) = nullptr;
         return;
     }
 
-    if (ptrDelete == (*head)){
-        cout << "delete opa3" << endl;
-        cout << (*head)->ptrNext << endl;
-        (*head)->ptrNext->ptrPrev = nullptr;
-        (*head) = (*head)->ptrNext;
-        
+    (*head)->ptrNext->ptrPrev = nullptr;
+    (*head) = (*head)->ptrNext;
 
-        delete ptrDelete;
-    } else {
-        cout << "Algo deu errado." << endl;
-    }
+    delete ptrDelete;
 
     return;
 }
@@ -144,3 +135,4 @@ template void deleteFirst<NodeTree<int>*>(Node<NodeTree<int>*>**);
 
 template Node<NodeTree<int>>* createNode<NodeTree<int>>(NodeTree<int>);
 template void insertEnd<NodeTree<int>*>(Node<NodeTree<int>*>**, NodeTree<int>*);
+template void displayList<NodeTree<int>*>(Node<NodeTree<int>*>*);
