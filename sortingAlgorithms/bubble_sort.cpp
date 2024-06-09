@@ -6,6 +6,7 @@ using namespace std;
 
 template <typename T>
 void bubbleSort(Node<T>* head) {
+    // Verifica se a lista está vazia
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
         return;
@@ -14,6 +15,7 @@ void bubbleSort(Node<T>* head) {
     Node<T>* ptrOuter = head;
     Node<T>* ptrInner = head;
 
+    // Algoritmo do Bubble Sort
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = head;
         while (ptrInner->ptrNext != nullptr) {
@@ -28,6 +30,7 @@ void bubbleSort(Node<T>* head) {
 
 template <typename T>
 void optimizedBubbleSort(Node<T>* head) {
+    // Verifica se a lista está vazia
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar bubbleSort" << endl;
         return;
@@ -38,6 +41,7 @@ void optimizedBubbleSort(Node<T>* head) {
     Node<T>* last_correct = head -> ptrPrev;
     bool bUnordered = false;
 
+    // Algoritmo do Bubble Sort Otimizado
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = head;
         bUnordered = false;
@@ -51,11 +55,12 @@ void optimizedBubbleSort(Node<T>* head) {
         ptrOuter = ptrOuter->ptrNext;
         last_correct = last_correct->ptrPrev;
 
+        // Se a lista estiver ordenada, sai do loop
         if (bUnordered == false) break;
     }
 }
 
-// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+// Fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
 template void optimizedBubbleSort<int>(Node<int>*);
 template void bubbleSort<int>(Node<int>*);
 

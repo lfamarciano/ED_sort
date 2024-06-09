@@ -6,6 +6,7 @@ using namespace std;
 
 template <typename T>
 void selectionSort(Node<T>* head) {
+    // Verifica se a lista está vazia
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
         return;
@@ -14,6 +15,7 @@ void selectionSort(Node<T>* head) {
     Node<T>* ptrOuter = head;
     Node<T>* ptrInner = nullptr;
 
+    // Algoritmo do Selection Sort
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = ptrOuter->ptrNext;
 
@@ -30,6 +32,7 @@ void selectionSort(Node<T>* head) {
 
 template <typename T>
 void optimizedSelectionSort(Node<T>* head) {
+    // Verifica se a lista está vazia
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar selectionSort" << endl;
         return;
@@ -40,6 +43,7 @@ void optimizedSelectionSort(Node<T>* head) {
     Node<T>* ptrSwap = nullptr;
     int minValue = 0;
 
+    // Algoritmo do Selection Sort Otimizado
     while (ptrOuter->ptrNext != nullptr) {
         ptrInner = ptrOuter->ptrNext;
         minValue = ptrOuter->payload;
@@ -52,12 +56,12 @@ void optimizedSelectionSort(Node<T>* head) {
             ptrInner = ptrInner->ptrNext;
         }
 
-        // usando essa condição pois na última iteração faz uma troca indevida
+        // Evita a troca desnecessária na última iteração
         if (minValue < ptrOuter->payload) swapValue(ptrOuter->payload, ptrSwap->payload);
         ptrOuter = ptrOuter->ptrNext;
     }
 }
 
-// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+// Fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
 template void selectionSort<int>(Node<int>*);
 template void optimizedSelectionSort<int>(Node<int>*);

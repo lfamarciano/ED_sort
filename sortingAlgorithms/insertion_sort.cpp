@@ -8,6 +8,7 @@ template class Node<int>;
 
 template <typename T>
 void insertionSort(Node<T>* head) {
+    // Verifica se a lista está vazia
     if (head == nullptr) {
         cout << "Lista vazia: Não é possível realizar insertionSort" << endl;
         return;
@@ -15,20 +16,21 @@ void insertionSort(Node<T>* head) {
     
     Node<T>* ptrOuter = head->ptrNext;
 
+    // Algoritmo do Insertion Sort
     while(ptrOuter != nullptr) {
         Node<T>* ptrInner = ptrOuter->ptrPrev;
         Node<T>* current = ptrOuter;
         
-        while(ptrInner != head -> ptrPrev && ptrInner->payload > current->payload) {
+        while(ptrInner != head->ptrPrev && ptrInner->payload > current->payload) {
             swapValue(current->payload, ptrInner->payload);
             
             current = ptrInner;
             ptrInner = ptrInner->ptrPrev;
         }
         
-    ptrOuter = ptrOuter->ptrNext;
+        ptrOuter = ptrOuter->ptrNext;
     }
 }
 
-// fazendo instanciação explícita para criar a função do tipo utilizado em tempo de compilação
+// Fazendo instanciação explícita para criar a função do tipo utilizado em tempo de compilação
 template void insertionSort<int>(Node<int>*);

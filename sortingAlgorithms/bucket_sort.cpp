@@ -67,7 +67,7 @@ void bucketSort(Node<T>* head) {
     return;
 }
 
-// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+// Fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
 template void insertBucket<int>(Node<int>**, int);
 template void bucketSort<int>(Node<int>*);
 

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../doubleLinkedList/dubblelinkedlist.h"
+#include "../doubleLinkedList/doublelinkedlist.h"
 
 template <typename T>
 void selectionSort(Node<T>*);

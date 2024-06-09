@@ -1,10 +1,11 @@
-#include "dubblelinkedlist.h"
+#include "doublelinkedlist.h"
 #include "../trees/binarytree.h"
 
 #include <iostream>
 
 using namespace std;
 
+// Troca os valores de duas referências
 template <typename T>
 void swapValue(T& refValue1, T& refValue2) {
     T temp = refValue1;
@@ -12,6 +13,7 @@ void swapValue(T& refValue1, T& refValue2) {
     refValue2 = temp;
 }
 
+// Cria um novo nó com a carga fornecida
 template <typename T>
 Node<T>* createNode(T payload)
 {
@@ -23,27 +25,27 @@ Node<T>* createNode(T payload)
     return temp;
 }
 
+// Exibe a lista
 template <typename T>
 void displayList(Node<T>* node)
 {
-    if (node == nullptr)
-    {
-        cout << "Lista vazia: Não é possível realizar displayList" << endl;
+    if (node == nullptr) {
+        cout << "Lista vazia: Não é possível exibir a lista" << endl;
         return;
     }
     
-    if (node->ptrPrev->ptrNext != nullptr)
-    {
-        cout << "Meio ou Fim da Lista: Não é possível realizar displayList" << endl;
+    // Verifica se estamos começando do nó principal
+    if (node->ptrPrev->ptrNext != nullptr) {
+        cout << "Meio ou fim da lista: Não é possível exibir a lista" << endl;
         return;
     }
     
     Node<T>* temp = node;
      
-    cout << "Payload: ";
+    cout << "Carga: ";
     
-    while(temp != nullptr)
-    {
+    // Exibe a lista
+    while(temp != nullptr) {
         cout << temp->payload << " ";
         temp = temp->ptrNext;
     }
@@ -51,19 +53,19 @@ void displayList(Node<T>* node)
     cout << endl;
 }
 
+// Insere um novo nó no início da lista
 template <typename T>
 void insertFront(Node<T>** head, T payload)
 {
     Node<T>* newNode = createNode(payload);
     
-    if ((*head) == nullptr)
-    {   
+    if ((*head) == nullptr) {
         (*head) = newNode;
-        (*head)-> ptrPrev = (*head); //para acessar o último elemento
+        (*head)->ptrPrev = (*head); // Adiciona um ponteiro para o último elemento
         return;
     }
     
-    newNode->ptrPrev = (*head) -> ptrPrev; //para acessar o último elemento
+    newNode->ptrPrev = (*head)->ptrPrev; // Adiciona um ponteiro para o último elemento
     (*head)->ptrPrev = newNode;
     newNode->ptrNext = (*head);
     (*head) = newNode;
@@ -71,84 +73,82 @@ void insertFront(Node<T>** head, T payload)
     return;
 }
 
+// Insere um novo nó no final da lista
 template <typename T>
 void insertEnd(Node<T>** head, T payload)
 {
     Node<T>* newNode = createNode(payload);
     
-    if ((*head) == nullptr)
-    {
+    if ((*head) == nullptr) {
         (*head) = newNode;
-        (*head)-> ptrPrev = (*head);
+        (*head)->ptrPrev = (*head);
         return;
     }
   
-    Node<T>* last = (*head) -> ptrPrev;
+    Node<T>* last = (*head)->ptrPrev; // Acessa o último elemento
     
-    (*head) -> ptrPrev = newNode; //para acessar o último elemento
+    (*head)->ptrPrev = newNode; // Adiciona um ponteiro para o último elemento
 
-    newNode->ptrPrev = last; // newNode aponta para o fim da lista
-    last->ptrNext = newNode; // Antigo último elemento aponta para o novo nó
+    newNode->ptrPrev = last; 
+    last->ptrNext = newNode;
 
     return;
 }
 
+// Busca um nó pelo seu valor
 template <typename T>
 Node<T>* searchNodebyValue(Node<T>* head, T value)
 {
-    if (head == nullptr)
-    {
-        //newNode -> ptrNext = nullptr; Essa linha não é obrigatória pois já definimos anteriormente
-        // cout << "Ponteiro head é nulo" << endl;
+    if (head == nullptr) {
         return nullptr;
     }
     
     Node<T>* temp = head;
     
-    //Percorremos a lista até achar algum valor correspondênte ou até seu fim
-    while(temp != nullptr && temp->payload != value) 
-    {
+    // Percorre elemento a elemento verificando o valor
+    while(temp != nullptr && temp->payload != value) {
         temp = temp->ptrNext;
     }
     
-    if (temp == nullptr)
-    {
-        // cout << "Não tem nó com esse valor!" << endl;
+    if (temp == nullptr) {
         return nullptr;
     }
 
     return temp;
 }
 
-
+// Remove toda a lista
 template <typename T>
 void deleteList(Node<T>** head)
 {
     Node<T>* current = *head;
     Node<T>* next = nullptr;
 
-    while(current != nullptr)
-    {
+    // Deleta elemento a elemento, começando do primeiro
+    while(current != nullptr) {
         next = current->ptrNext;
         delete current;
         current = next;
     }
+
     *head = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
 }
 
+// Remove o primeiro nó da lista
 template <typename T>
 void deleteFirst(Node<T>** head)
 {
-    if (head == nullptr){
+    if (head == nullptr) {
         cout << "Não é possível fazer a operação de deleção." << endl;
         return;
     }
     
-    Node<T>* ptrDelete = (*head);
+    Node<T>* ptrDelete = (*head); // Guarda o nó a ser removido (head)
 
-    if ((*head)->ptrNext == nullptr){
+    // Caso só tenha 1 elemento
+    if ((*head)->ptrNext == nullptr) {
         delete ptrDelete;
-        (*head) = nullptr;
+        (*head) = nullptr; // Garante que o ponteiro da lista aponte para null após a deleção
         return;
     }
 
@@ -160,7 +160,7 @@ void deleteFirst(Node<T>** head)
     return;
 }
 
-// fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
+// Fazendo instanciação explícita para criar as funções do tipo utilizado em tempo de compilação
 template void swapValue<int>(int&, int&);
 template Node<int>* createNode<int>(int);
 template void displayList<int>(Node<int>*);

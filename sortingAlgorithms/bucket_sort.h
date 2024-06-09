@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../doubleLinkedList/dubblelinkedlist.h"
+#include "../doubleLinkedList/doublelinkedlist.h"
 #include "insertion_sort.h"
 
 template <typename T>

@@ -1,7 +1,7 @@
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
-#include "../doubleLinkedList/dubblelinkedlist.h"
+#include "../doubleLinkedList/doublelinkedlist.h"
 #include <iostream>
 
 #pragma once
