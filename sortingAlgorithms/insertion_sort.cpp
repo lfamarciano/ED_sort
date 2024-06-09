@@ -19,7 +19,7 @@ void insertionSort(Node<T>* head) {
         Node<T>* ptrInner = ptrOuter->ptrPrev;
         Node<T>* current = ptrOuter;
         
-        while(ptrInner != nullptr && ptrInner->payload > current->payload) {
+        while(ptrInner != head -> ptrPrev && ptrInner->payload > current->payload) {
             swapValue(current->payload, ptrInner->payload);
             
             current = ptrInner;
