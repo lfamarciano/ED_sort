@@ -87,6 +87,35 @@ void insertEnd(Node<T>** head, T payload)
     temp->ptrNext = newNode; // Antigo último elemento aponta para o novo nó
 }
 
+
+template <typename T>
+Node<T>* searchNodebyValue(Node<T>* head, T iValue)
+{
+    if (head == nullptr)
+    {
+        //newNode -> ptrNext = nullptr; Essa linha não é obrigatória pois já definimos anteriormente
+        // cout << "Ponteiro head é nulo" << endl;
+        return nullptr;
+    }
+    
+    Node<T>* temp = head;
+    
+    //Percorremos a lista até achar algum valor correspondênte ou até seu fim
+    while(temp != nullptr && temp->iPayload != iValue) 
+    {
+        temp = temp->ptrNext;
+    }
+    
+    if (temp == nullptr)
+    {
+        // cout << "Não tem nó com esse valor!" << endl;
+        return nullptr;
+    }
+
+    return temp;
+}
+
+
 template <typename T>
 void deleteList(Node<T>** head)
 {
@@ -140,3 +169,4 @@ template Node<NodeTree<int>>* createNode<NodeTree<int>>(NodeTree<int>);
 template void insertEnd<NodeTree<int>*>(Node<NodeTree<int>*>**, NodeTree<int>*);
 template void displayList<NodeTree<int>*>(Node<NodeTree<int>*>*);
 template void deleteList<NodeTree<int>*>(Node<NodeTree<int>*>**);
+template Node<int>* searchNodebyValue<int>(Node<int>*, int);

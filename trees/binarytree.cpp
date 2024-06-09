@@ -96,7 +96,7 @@ void deleteTree(NodeTree<T>** startingNode) {
 
     delete (*startingNode);
     (*startingNode) = nullptr;
-
+    return;
 }
 
 

@@ -9,7 +9,7 @@ using namespace std::chrono;
 
 namespace duracaoAlgoritmo
 {
-    enum Algoritmo {BubbleSort, BubbleSortOtimizado, SelectionSort, SelectionSortOtimizado, InsertionSort, BucketSort};
+    enum Algoritmo {BubbleSort, BubbleSortOtimizado, SelectionSort, SelectionSortOtimizado, InsertionSort, BucketSort, DFS, BFS, ListSearch};
 
     template <typename T>
     float tempoExecucao(Node<T>* head, Algoritmo algoritmo)
@@ -35,6 +35,50 @@ namespace duracaoAlgoritmo
                 break;
             case BucketSort:
                 bucketSort(head);
+                break;
+            default:
+                break;
+        }
+
+        auto timeStop = high_resolution_clock::now();
+
+        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        return timeDuration.count();
+    }
+
+    template <typename T>
+    float tempoExecucao(NodeTree<T>* root, T value, Algoritmo algoritmo)
+    {
+        auto timeStart = high_resolution_clock::now();
+        
+        switch (algoritmo)
+        {
+            case DFS:
+                dfsSearch(root, value);
+                break;
+            case BFS:
+                bfsSearch(root, value);
+                break;
+            default:
+                break;
+        }
+
+        auto timeStop = high_resolution_clock::now();
+
+        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        return timeDuration.count();
+    }
+
+    template <typename T>
+    float tempoExecucao(Node<T>* head, T value, Algoritmo algoritmo)
+    {
+        auto timeStart = high_resolution_clock::now();
+        
+        switch (algoritmo)
+        {
+            case ListSearch:
+                searchNodebyValue(head, value);
+                break;
             default:
                 break;
         }
@@ -50,49 +94,61 @@ using namespace duracaoAlgoritmo;
 
 int main()
 {
-    // int randomValue;
-    // NodeTree<int>* root1 = nullptr;
-    // NodeTree<int>* root2 = nullptr;
-    // Node<int>* head = nullptr;
+    int randomValue;
+    NodeTree<int>* root1 = nullptr;
+    NodeTree<int>* root2 = nullptr;
+    Node<int>* head = nullptr;
 
-    // cout << "DFS; BFS" << endl;
+    cout << "DFS; BFS" << endl;
 
-    // for (int iNumListas = 0; iNumListas<100; iNumListas++) // testando em 100 árvores
-    // {
-    //     head = nullptr;
-    //     root1 = nullptr;
-    //     root2 = nullptr;
+    for (int iNumListas = 0; iNumListas<100; iNumListas++) // testando em 100 árvores
+    {
+        head = nullptr;
+        root1 = nullptr;
+        root2 = nullptr;
 
-    //     auto timeStart = high_resolution_clock::now();
-    //     for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores entre 0 e 100000 na árvore
-    //     {
-    //         randomValue = rand() % 100001;
+        auto timeStart = high_resolution_clock::now();
+        for (int iTamTree = 0; iTamTree < 10000; iTamTree++) // adicionando 10000 valores entre 0 e 100000 na árvore
+        {
+            randomValue = rand() % 100001;
 
-    //         //cria 2 árvores iguais
-    //         root1 = insertNodeTree(root1, randomValue);
-    //         root2 = insertNodeTree(root2, randomValue);
-    //     }
-    //     auto timeStop = high_resolution_clock::now();
-    //     auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+            //cria 2 árvores iguais
+            root1 = insertNodeTree(root1, randomValue);
+            root2 = insertNodeTree(root2, randomValue);
+        }
+        auto timeStop = high_resolution_clock::now();
+        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        cout << timeDuration.count() << ";";
 
-    //     for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores entre 0 e 100000 em uma lista
-    //     {
-    //         randomValue = rand() % 100001;
+        auto timeStart = high_resolution_clock::now();
+        for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores entre 0 e 100000 em uma lista
+        {
+            randomValue = rand() % 100001;
 
-    //         insertFront(&head, randomValue);
+            insertFront(&head, randomValue);
 
-    //     }
-    //     cout << tempoExecucao(head1, BubbleSort) << ";";
-    //     cout << tempoExecucao(head2, BubbleSortOtimizado) << ";";
-    //     cout << tempoExecucao(head3, SelectionSort) << ";";
-    //     cout << tempoExecucao(head4, SelectionSortOtimizado) << ";";
-    //     cout << tempoExecucao(head5, InsertionSort) << ";";
-    //     cout << tempoExecucao(head6, BucketSort) << endl;
+        }
+        auto timeStop = high_resolution_clock::now();
+        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        cout << timeDuration.count() << ";";
+        
+        int sumDFS = 0;
+        int sumBFS = 0;
+        int sumList = 0;
+        for (int numValues = 0; numValues < 5; numValues++){
+            randomValue = rand() % 100001;
+            sumDFS = sumDFS + tempoExecucao(root1, randomValue, DFS);
+            sumBFS = sumBFS + tempoExecucao(root2, randomValue, BFS);
+            sumList = sumList + tempoExecucao(head, randomValue, ListSearch);
+        }
+        cout << sumDFS/5 << ";";
+        cout << sumBFS/5 << ";";
+        cout << sumList/5 << ";";
 
-    //     deleteList(&head);
-
-    
-    // }
+        deleteList(&head);
+        deleteTree(&root1);
+        deleteTree(&root2);
+    }
 
 
 

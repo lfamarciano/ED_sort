@@ -28,6 +28,9 @@ template <typename T>
 void insertEnd(Node<T>** head, T payload);
 
 template <typename T>
+Node<T>* searchNodebyValue(Node<T>*, T);
+
+template <typename T>
 void deleteList(Node<T>** head);
 
 template <typename T>
