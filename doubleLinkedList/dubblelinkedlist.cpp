@@ -139,3 +139,4 @@ template void deleteFirst<NodeTree<int>*>(Node<NodeTree<int>*>**);
 template Node<NodeTree<int>>* createNode<NodeTree<int>>(NodeTree<int>);
 template void insertEnd<NodeTree<int>*>(Node<NodeTree<int>*>**, NodeTree<int>*);
 template void displayList<NodeTree<int>*>(Node<NodeTree<int>*>*);
+template void deleteList<NodeTree<int>*>(Node<NodeTree<int>*>**);

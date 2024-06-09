@@ -28,6 +28,12 @@ void deleteTree(NodeTree<T>**);
 template <typename T>
 void bfsTraversal(NodeTree<T>*);
 
+template <typename T>
+NodeTree<T>* bfsSearch(NodeTree<T>*, T);
+
+template <typename T>
+NodeTree<T>* dfsSearch(NodeTree<T>*, T);
+
 // #include "binarytree.tpp"
 
 #endif // BINARYTREE_H
