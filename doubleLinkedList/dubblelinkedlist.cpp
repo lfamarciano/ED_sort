@@ -89,7 +89,7 @@ void insertEnd(Node<T>** head, T payload)
 
 
 template <typename T>
-Node<T>* searchNodebyValue(Node<T>* head, T iValue)
+Node<T>* searchNodebyValue(Node<T>* head, T value)
 {
     if (head == nullptr)
     {
@@ -101,7 +101,7 @@ Node<T>* searchNodebyValue(Node<T>* head, T iValue)
     Node<T>* temp = head;
     
     //Percorremos a lista até achar algum valor correspondênte ou até seu fim
-    while(temp != nullptr && temp->iPayload != iValue) 
+    while(temp != nullptr && temp->payload != value) 
     {
         temp = temp->ptrNext;
     }

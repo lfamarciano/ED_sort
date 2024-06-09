@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
-#include "../doubleLinkedList/dubblelinkedlist.h"
-#include "../trees/binarytree.h"
+#include "doubleLinkedList/dubblelinkedlist.h"
+#include "trees/binarytree.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -98,8 +98,11 @@ int main()
     NodeTree<int>* root1 = nullptr;
     NodeTree<int>* root2 = nullptr;
     Node<int>* head = nullptr;
+    auto timeStart = high_resolution_clock::now();
+    auto timeStop = high_resolution_clock::now();
+    auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
 
-    cout << "DFS; BFS" << endl;
+    cout << "Tree Creation Time; List Creation Time; DFS Time; BFS Time; List Search Time" << endl;
 
     for (int iNumListas = 0; iNumListas<100; iNumListas++) // testando em 100 árvores
     {
@@ -107,7 +110,7 @@ int main()
         root1 = nullptr;
         root2 = nullptr;
 
-        auto timeStart = high_resolution_clock::now();
+        timeStart = high_resolution_clock::now();
         for (int iTamTree = 0; iTamTree < 10000; iTamTree++) // adicionando 10000 valores entre 0 e 100000 na árvore
         {
             randomValue = rand() % 100001;
@@ -116,11 +119,11 @@ int main()
             root1 = insertNodeTree(root1, randomValue);
             root2 = insertNodeTree(root2, randomValue);
         }
-        auto timeStop = high_resolution_clock::now();
-        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
-        cout << timeDuration.count() << ";";
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        cout << timeDuration.count()/2 << ";";
 
-        auto timeStart = high_resolution_clock::now();
+        timeStart = high_resolution_clock::now();
         for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // adicionando 10000 valores entre 0 e 100000 em uma lista
         {
             randomValue = rand() % 100001;
@@ -128,8 +131,8 @@ int main()
             insertFront(&head, randomValue);
 
         }
-        auto timeStop = high_resolution_clock::now();
-        auto timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
+        timeStop = high_resolution_clock::now();
+        timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
         cout << timeDuration.count() << ";";
         
         int sumDFS = 0;
@@ -143,7 +146,7 @@ int main()
         }
         cout << sumDFS/5 << ";";
         cout << sumBFS/5 << ";";
-        cout << sumList/5 << ";";
+        cout << sumList/5 << ";" << endl;
 
         deleteList(&head);
         deleteTree(&root1);

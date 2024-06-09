@@ -3,47 +3,47 @@
 
 using namespace std;
 
-int main()
-{
-    NodeTree<int>* root = nullptr;
-    NodeTree<int>* achado = nullptr;
+// int main()
+// {
+//     NodeTree<int>* root = nullptr;
+//     NodeTree<int>* achado = nullptr;
 
-    root = insertNodeTree(root, 42);
-    root = insertNodeTree(root, 13);
-    root = insertNodeTree(root, 11);
-    root = insertNodeTree(root, 10);
-    root = insertNodeTree(root, 28);
-    root = insertNodeTree(root, 51);
-    root = insertNodeTree(root, 171);
+//     root = insertNodeTree(root, 42);
+//     root = insertNodeTree(root, 13);
+//     root = insertNodeTree(root, 11);
+//     root = insertNodeTree(root, 10);
+//     root = insertNodeTree(root, 28);
+//     root = insertNodeTree(root, 51);
+//     root = insertNodeTree(root, 171);
 
-    cout << "BFS Traversal: ";
-    bfsTraversal(root);
+//     cout << "BFS Traversal: ";
+//     bfsTraversal(root);
 
-    cout << "Procurando node: ";
-    achado = bfsSearch(root, 30);
-    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+//     cout << "Procurando node: ";
+//     achado = bfsSearch(root, 30);
+//     cout << ((achado != nullptr) ? achado->payload : -1) << endl;
 
-    cout << "Procurando node: ";
-    achado = bfsSearch(root, 10);
-    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+//     cout << "Procurando node: ";
+//     achado = bfsSearch(root, 10);
+//     cout << ((achado != nullptr) ? achado->payload : -1) << endl;
 
-    cout << "Procurando node: ";
-    achado = bfsSearch(root, 42);
-    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+//     cout << "Procurando node: ";
+//     achado = bfsSearch(root, 42);
+//     cout << ((achado != nullptr) ? achado->payload : -1) << endl;
 
-    cout << "Procurando node: ";
-    achado = bfsSearch(root, 171);
-    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+//     cout << "Procurando node: ";
+//     achado = bfsSearch(root, 171);
+//     cout << ((achado != nullptr) ? achado->payload : -1) << endl;
 
-    deleteTree(&root);
-    // cout << root->ptrLeft->payload << endl;
-    // root = nullptr;
-    cout << "BFS Traversal: ";
-    bfsTraversal(root);
-    cout << endl;
+//     deleteTree(&root);
+//     // cout << root->ptrLeft->payload << endl;
+//     // root = nullptr;
+//     cout << "BFS Traversal: ";
+//     bfsTraversal(root);
+//     cout << endl;
 
-    return 0;
-}
+//     return 0;
+// }
 
 template <typename T>
 NodeTree<T>* createNodeTree(T payload)
