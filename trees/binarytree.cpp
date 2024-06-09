@@ -6,6 +6,7 @@ using namespace std;
 int main()
 {
     NodeTree<int>* root = nullptr;
+    NodeTree<int>* achado = nullptr;
 
     root = insertNodeTree(root, 42);
     root = insertNodeTree(root, 13);
@@ -17,7 +18,22 @@ int main()
 
     cout << "BFS Traversal: ";
     bfsTraversal(root);
-    cout << endl;
+
+    cout << "Procurando node: ";
+    achado = bfsSearch(root, 30);
+    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+
+    cout << "Procurando node: ";
+    achado = bfsSearch(root, 10);
+    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+
+    cout << "Procurando node: ";
+    achado = bfsSearch(root, 42);
+    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
+
+    cout << "Procurando node: ";
+    achado = bfsSearch(root, 171);
+    cout << ((achado != nullptr) ? achado->payload : -1) << endl;
 
     return 0;
 }
@@ -91,9 +107,68 @@ void bfsTraversal(NodeTree<T>* startingNode)
 
     cout << endl;
 
+    deleteList(&head); //Apaga a lista, caso necessário
+
     //displayList(head); //Para verificar que a lista está sendo apagada
+
+    return;
+}
+
+template <typename T>
+NodeTree<T>* bfsSearch(NodeTree<T>* startingNode, T target)
+{
+    if (startingNode == nullptr) return nullptr;
+
+    if (startingNode->payload == target) return startingNode;
+
+    Node<NodeTree<T>*>* head = nullptr; 
+    NodeTree<T>*  currentNode = nullptr;
+
+    insertEnd(&head, startingNode);
+
+    while (head != nullptr)
+    {   
+        currentNode = head->payload;
+
+        if (currentNode->payload == target){
+            break;
+        }
+        
+        if (currentNode->ptrLeft != nullptr)
+        {   
+            insertEnd(&head, currentNode -> ptrLeft);
+        }
+        
+        if (currentNode->ptrRight != nullptr)
+        {   
+            insertEnd(&head, currentNode -> ptrRight);
+        }
+
+        deleteFirst(&head);
+    }
+
+    if(head == nullptr) return nullptr;
+
+    deleteList(&head); //Apaga a lista, caso necessário
+
+    return currentNode;
+}
+
+template <typename T>
+NodeTree<T>* dfsSearch(NodeTree<T>* startingNode, T target)
+{
+    if (startingNode == nullptr) return nullptr;
+
+    if (startingNode->payload == target) return startingNode;
+
+    NodeTree<T>* result = dfsSearch(startingNode->ptrLeft, target);
+    if (result != nullptr) return result; 
+
+    return dfsSearch(startingNode->ptrRight, target);
 }
 
 template NodeTree<int>* createNodeTree(int);
 template NodeTree<int>* insertNodeTree(NodeTree<int>*, int);
+template NodeTree<int>* bfsSearch(NodeTree<int>*, int);
+template NodeTree<int>* dfsSearch<int>(NodeTree<int>*, int);
 template void bfsTraversal(NodeTree<int>*);
