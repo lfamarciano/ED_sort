@@ -102,8 +102,7 @@ using namespace duracaoAlgoritmo;
 int main()
 {
     int randomValue;
-    NodeTree<int>* root1 = nullptr;
-    NodeTree<int>* root2 = nullptr;
+    NodeTree<int>* root = nullptr;
     Node<int>* head1 = nullptr;
     Node<int>* head2 = nullptr;
     Node<int>* head3 = nullptr;
@@ -127,8 +126,7 @@ int main()
         head5 = nullptr;
         head6 = nullptr;
         head7 = nullptr;
-        root1 = nullptr;
-        root2 = nullptr;
+        root = nullptr;
 
         // Calcula o tempo de criação da árvore
         timeStart = high_resolution_clock::now();
@@ -137,12 +135,11 @@ int main()
             randomValue = rand() % 100001;
 
             // Cria 2 árvores iguais
-            root1 = insertNodeTree(root1, randomValue);
-            root2 = insertNodeTree(root2, randomValue);
+            root = insertNodeTree(root, randomValue);
         }
         timeStop = high_resolution_clock::now();
         timeDuration = duration_cast<nanoseconds>(timeStop - timeStart);
-        cout << timeDuration.count()/2 << ";";
+        cout << timeDuration.count() << ";";
 
         // Cria 6 vezes a mesma lista para ordenar com os algoritmos
         for (int iTamLista = 0; iTamLista < 10000; iTamLista++) // Adicionando 10000 entre 0 e 100 valores na lista
@@ -180,8 +177,8 @@ int main()
         // Executa a busca de 5 valores aleatórios diferentes (entre 0 e 100000), então faz a média
         for (int numValues = 0; numValues < 5; numValues++){
             randomValue = rand() % 100001;
-            sumDFS = sumDFS + tempoExecucao(root1, randomValue, DFS);
-            sumBFS = sumBFS + tempoExecucao(root2, randomValue, BFS);
+            sumDFS = sumDFS + tempoExecucao(root, randomValue, DFS);
+            sumBFS = sumBFS + tempoExecucao(root, randomValue, BFS);
             sumList = sumList + tempoExecucao(head7, randomValue, ListSearch);
         }
 
@@ -203,8 +200,7 @@ int main()
         deleteList(&head4);
         deleteList(&head5);
         deleteList(&head6);
-        deleteTree(&root1);
-        deleteTree(&root2);
+        deleteTree(&root);
     }
 
     return 0;

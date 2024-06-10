@@ -37,7 +37,7 @@ Tabela 2: Tempos de Busca e Criação de Estruturas
 
 Esses dados são fundamentais para entendermos a eficiência e o desempenho das estruturas de dados em diferentes cenários e para diferentes propósitos. Vale ressaltar que há o uso de uma lista encadeada generica no algoritmo BFS, não otimizada para essa aplicação. Realizamos alguams otimizações simples, como a adição de um ponteiro apontando ao último elementos, assim podendo acessar esse elemento sem percorrer a lista.
 
-
+Disclaimer: A execução do algoritmo foi feita usando o Visual Studio Code, executado com a placa de vídeo dedicada (pode ser insignificante) no sistema operaciona Ubuntu 23.10.
 
 
 **Alunos:**\
