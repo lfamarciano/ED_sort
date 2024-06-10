@@ -8,11 +8,11 @@ Os testes aqui realizados foram feitos para estruturas com 10000 dados, usando i
 Com o csv dos tempos de cada algoritmo, realizamos uma análise sobre cada método de ordenação. Para começar, tiramos algumas estatísticas, como apresentado na tabela 1 abaixo:
 
 Tabela 1: Algoritmos de Ordenação
-|                | BubbleSort  | BubbleSort Otimizado | SelectionSort | SelectionSort Otimizado | InsertionSort | BucketSort |
+|                | BubbleSort  | BubbleSortOtimizado | SelectionSort | SelectionSortOtimizado | InsertionSort | BucketSort |
 |----------------|-------------|---------------------|---------------|------------------------|---------------|------------|
-| Média          | 9,68E+08    | 5,55E+08            | 2,99E+08      | 3,44E+08              | 2,31E+08      | 1,77E+07   |
-| Mediana        | 8,96E+08    | 5,02E+08            | 2,75E+08      | 3,20E+08              | 2,12E+08      | 1,52E+07   |
-| Desvio Padrão  | 2,14E+08    | 1,34E+08            | 7,78E+07      | 6,77E+07              | 5,93E+07      | 8,36E+06   |
+| Média          | 6,15E+08    | 3,15E+08            | 2,61E+08      | 2,93E+08              | 1,51E+08      | 9,26E+06   |
+| Mediana        | 6,08E+08    | 3,10E+08            | 2,60E+08      | 2,91E+08              | 1,49E+08      | 8,95E+06   |
+| Desvio Padrão  | 3,58E+07    | 1,95E+07            | 1,51E+07      | 1,63E+07              | 7,52E+06      | 8,77E+05   |
 
 Então, resolvemos usar a **média** para plotar um gráfico, facilitando a comparação:
 
@@ -31,9 +31,9 @@ Segue abaixo a tabela 2 com os tempos médios e outras estatísticas relacionada
 Tabela 2: Tempos de Busca e Criação de Estruturas
 |                | Tree Creation Time | List Creation Time | DFS Time | BFS Time | List Search Time |
 |----------------|--------------------|--------------------|----------|----------|------------------|
-| Média          | 4,37E+06           | 9,06E+05           | 2,68E+05 | 1,13E+06 | 6,64E+04         |
-| Mediana        | 3,97E+06           | 8,06E+05           | 1,88E+05 | 1,00E+06 | 5,24E+04         |
-| Desvio Padrão  | 1,32E+06           | 3,43E+05           | 5,90E+05 | 5,22E+05 | 4,66E+04         |
+| Média          | 1,53E+06           | 2,53E+05           | 1,23E+05 | 2,53E+05 | 4,53E+04         |
+| Mediana        | 1,51E+06           | 2,46E+05           | 1,24E+05 | 2,54E+05 | 4,42E+04         |
+| Desvio Padrão  | 1,14E+05           | 2,97E+04           | 1,31E+04 | 2,47E+04 | 8,32E+03         |
 
 Esses dados são fundamentais para entendermos a eficiência e o desempenho das estruturas de dados em diferentes cenários e para diferentes propósitos. Vale ressaltar que há o uso de uma lista encadeada generica no algoritmo BFS, não otimizada para essa aplicação. Realizamos alguams otimizações simples, como a adição de um ponteiro apontando ao último elementos, assim podendo acessar esse elemento sem percorrer a lista.
 
